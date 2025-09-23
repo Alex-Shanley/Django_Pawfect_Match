@@ -1,36 +1,36 @@
 from django import forms
-from .models import Submission
+from .models import Pet
 
 
-class ContactForm(forms.ModelForm):
-    """Form for contact submissions"""
+class PetForm(forms.ModelForm):
     class Meta:
-        model = Submission
-        fields = ['first_name', 'surname', 'email', 'message', 'terms']
+        model = Pet
+        fields = ['img', 'name', 'age', 'breed', 'species']
         widgets = {
-            'first_name': forms.TextInput(attrs={
+            'name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter your first name'
+                'placeholder': 'Enter pet name'
             }),
-            'surname': forms.TextInput(attrs={
+            'age': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter your surname'
+                'placeholder': 'Enter age',
+                'min': '0',
+                'max': '50'
             }),
-            'email': forms.EmailInput(attrs={
+            'breed': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter your email'
+                'placeholder': 'Enter breed'
             }),
-            'message': forms.Textarea(attrs={
+            'species': forms.Select(attrs={
+                'class': 'form-control'
+            }),
+            'img': forms.FileInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter your message',
-                'rows': 5
-            }),
-            'terms': forms.CheckboxInput(attrs={
-                'class': 'form-check-input'
+                'accept': 'image/*'
             })
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['terms'].required = True
-        self.fields['terms'].label = 'I agree to the terms and conditions'
+        if self.instance.pk:
+            self.fields['img'].required = False

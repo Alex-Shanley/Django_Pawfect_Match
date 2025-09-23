@@ -1,10 +1,8 @@
 from django.db import models
-
-# Create your models here.
-
 from django.core.validators import MinValueValidator, MaxValueValidator
 import uuid
 import os
+
 
 def pet_image_upload_path(instance, filename):
     

@@ -1,3 +1,5 @@
+{% load static %}
+
 <section class="asked-questions">
   <div class="questions-container">
 
@@ -5,11 +7,10 @@
     <div class="questions-left">
       <h2>Frequently Asked Questions</h2>
       <p>
-        <!-- Brief introductory paragraph about the FAQ -->
         Have questions about adopting, caring for your new pet, or how our process works? We’ve compiled answers to the most common inquiries to guide you smoothly through every step of your journey with us. If you don’t find what you need, our team is always ready to assist.
       </p>
       <!-- Illustrative image relevant to FAQ -->
-      <img src="{{ url_for('static', filename='images/Illustration.png') }}" alt="FAQ Illustrations" />
+      <img src="{% static 'images/Illustration.png' %}" alt="FAQ Illustrations" />
     </div>
 
     <!-- Right FAQ Column: List of FAQ items -->
@@ -20,7 +21,6 @@
         <div class="faq-item active">
           <button class="faq-title">How soon will I have my pet?</button>
           <div class="faq-content">
-            <!-- Answer content for the FAQ question -->
             The time to adopt varies but usually takes a few days to complete all steps and welcome your new pet home.
           </div>
         </div>

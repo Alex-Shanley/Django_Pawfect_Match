@@ -7,19 +7,22 @@
     <div class="form-box-template">
       <!-- Form box with heading and description -->
 
-      <h2>Get In touch </h2>
+      <h2>Get In Touch</h2>
       <!-- Section title -->
 
       <p>We’re here to help! Contact us anytime with questions or to begin your journey toward finding the perfect pet and a loving new friend.</p>
       <!-- Introductory text about contacting -->
 
-      <form id="contactform" method="POST" action="{{ form_action}}">
-        <!-- Contact form with POST method and dynamic action URL -->
+      <form id="contactform" method="POST" action="{% url 'contact:contact' %}">
+       
+
+        {% csrf_token %}
+       
 
         <div class="name-row-template">
-          <!-- Row with two input fields for first name and surname -->
-           <input type="text" id="firstName" name="first_name" placeholder="First name" required>
-           <input type="text" id="lastName" name="surname" placeholder="Surname" required>
+          
+          <input type="text" id="firstName" name="first_name" placeholder="First name" required>
+          <input type="text" id="lastName" name="surname" placeholder="Surname" required>
         </div>
 
         <input type="email" name="email" placeholder="Email" required>
@@ -34,22 +37,19 @@
           <span>I agree to the Terms and Conditions</span>
         </label>
 
-        <!-- Display any flashed messages (success or error messages from backend) -->
-        {% with messages = get_flashed_messages()%}
-          {% if messages %}
-            <ul class="flashes">
-              {% for message in messages %}
-                <li>{{message}}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
+       
+        {% if messages %}
+          <ul class="flashes">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
 
         <button class="cbtn-template" type="submit">Send</button>
-        <!-- Submit button to send the form -->
+        
       </form>
-      <!-- End of contact form -->
-
+    
     </div>
   </div>
 </div>

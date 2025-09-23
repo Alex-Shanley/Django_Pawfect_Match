@@ -8,7 +8,8 @@
   <meta name="author" content="Alex Shanley" />
   <title>{% block title %}Pawfect Match{% endblock %}</title>
   
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
 </head>
@@ -20,16 +21,23 @@
 <nav class="nav">
     <ul>
       <li class="logo">
-        <a href="{{ url_for('index') }}">
-          <img src="{{ url_for('static', filename='images/Header logo.png') }}" alt="Pawfect Match Logo" class="logo-image" />
+        <a href="{% url 'core:index' %}">
+          <img src="{% static 'images/Header logo.png' %}" alt="Pawfect Match Logo" class="logo-image" />
         </a>
       </li>
-      <li class="hideOnMobile"><a href="{{ url_for('index') }}">HOME</a></li>
-      <li class="hideOnMobile"><a href="{{ url_for('about') }}">ABOUT</a></li>
-      <li class="hideOnMobile"><a href="{{ url_for('list_pets') }}">PETS</a></li>
-      <li class="hideOnMobile"><a href="{{ url_for('add') }}">ADD PET</a></li>
-      <li class="hideOnMobile"><a href="{{ url_for('faq') }}">FAQ</a></li>
-      <li class="hideOnMobile contact-button "><a href="{{ url_for('contact') }}">CONTACT US</a></li>
+      <li class="hideOnMobile"><a href="{% url 'core:index' %}">HOME</a></li>
+      <li class="hideOnMobile"><a href="{% url 'core:about' %}">ABOUT</a></li>
+      <li class="hideOnMobile"><a href="{% url 'pets:list_pets' %}">PETS</a></li>
+      {% if user.is_authenticated %}
+        <li class="hideOnMobile"><a href="{% url 'pets:add_pet' %}">ADD PET</a></li>
+        <li class="hideOnMobile"><a href="{% url 'auth_app:profile' %}">PROFILE</a></li>
+        <li class="hideOnMobile"><a href="{% url 'auth_app:logout' %}">LOGOUT</a></li>
+      {% else %}
+        <li class="hideOnMobile"><a href="{% url 'auth_app:login' %}">LOGIN</a></li>
+        <li class="hideOnMobile"><a href="{% url 'auth_app:register' %}">REGISTER</a></li>
+      {% endif %}
+      <li class="hideOnMobile"><a href="{% url 'core:faq' %}">FAQ</a></li>
+      <li class="hideOnMobile contact-button "><a href="{% url 'contact:contact' %}">CONTACT US</a></li>
       <li class="menu-button" onclick="showSidebar()">
         <a href="#">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
@@ -47,23 +55,39 @@
           </svg>
         </a>
       </li>
-      <li><a href="{{ url_for('index') }}">HOME</a></li>
-      <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-      <li><a href="{{ url_for('list_pets') }}">PETS</a></li>
-      <li><a href="{{ url_for('add') }}">ADD PET</a></li>
-      <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-      <li><a href="{{ url_for('contact') }}">CONTACT US</a></li>
+      <li><a href="{% url 'core:index' %}">HOME</a></li>
+      <li><a href="{% url 'core:about' %}">ABOUT</a></li>
+      <li><a href="{% url 'pets:list_pets' %}">PETS</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'pets:add_pet' %}">ADD PET</a></li>
+        <li><a href="{% url 'auth_app:profile' %}">PROFILE</a></li>
+        <li><a href="{% url 'auth_app:logout' %}">LOGOUT</a></li>
+      {% else %}
+        <li><a href="{% url 'auth_app:login' %}">LOGIN</a></li>
+        <li><a href="{% url 'auth_app:register' %}">REGISTER</a></li>
+      {% endif %}
+      <li><a href="{% url 'core:faq' %}">FAQ</a></li>
+      <li><a href="{% url 'contact:contact' %}">CONTACT US</a></li>
     </ul>
   </nav>
 
 
 
   <main>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    
     {% block content %}
 
 
-    
 
+    
 
     {% endblock %}
   </main>
@@ -72,7 +96,7 @@
     <div class="footer-container">
         <div class="footer-row">
               <div class="footer-colum">
-                <img src="{{ url_for('static', filename='images/footer logo.png') }}" alt="Logo">
+                <img src="{% static 'images/footer logo.png' %}" alt="Logo">
             </div>
             <div class="footer-colum">
                 <h4>ADDRESS</h4>
@@ -84,7 +108,7 @@
                 <h4>CONTACT</h4>
                 <ul>
                     <li><a href="tel:+0821234567"><i class="fas fa-phone"></i> (082) 1234 567</a></li>
-                    <li><a href="mailto:info@alexshanley.com"><i class="fas fa-envelope"></i> info@apawfectmatch.com</a></li>
+                    <li><a href="mailto:info@apawfectmatch.com"><i class="fas fa-envelope"></i> info@apawfectmatch.com</a></li>
                     <li><a><i class="fas fa-map-marker-alt"></i>Pawfect HQ</a></li>
                 </ul>
             </div>
@@ -104,6 +128,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

@@ -1,26 +1,19 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %} Pawfect Match{% endblock %}
+{% block title %} {{ title|default:"Pawfect Match" }} {% endblock %}
 
 {% block content %}
 
-
-
-
-{% set title = "Contact us" %}
 {% include 'hero.html' %}
 
-
-
-
-     <!-- Contact container start -->
+<!-- Contact container start -->
 <div class="contact">
 
   <!-- Left side with contact image -->
   <div class="left-contact">
     <div class="left-image">
-      <img src="{{ url_for('static', filename='images/contact-image.png') }}" alt="Contact image" class="Contact image" />
-      <!-- Contact image displayed -->
+      <img src="{% static 'images/contact-image.png' %}" alt="Contact image" class="contact-image" />
     </div>
   </div>
   <!-- Contact image end -->
@@ -28,49 +21,40 @@
   <!-- Right side with contact form -->
   <div class="right-contact">
     <div class="form-box">
-      <h2>Get In touch </h2>
-      <!-- Section heading -->
-
+      <h2>Get In Touch</h2>
       <p>We’re here to help! Contact us anytime with questions or to begin your journey toward finding the perfect pet and a loving new friend.</p>
-      <!-- Introductory text -->
 
-      <form id="contactform" method="POST" action="{{ url_for('contact') }}">
-        <!-- Contact form with POST to contact route -->
-
+      <form id="contactform" method="POST" action="">
+        {% csrf_token %}
         <div class="name-row">
-          <!-- Row with first name and surname inputs -->
-           <input type="text" id="firstName" name="first_name" placeholder="First name" required>
-           <input type="text" id="lastName" name="surname" placeholder="Surname" required>
-
+          {{ form.first_name.label_tag }}
+          {{ form.first_name }}
+          {{ form.surname.label_tag }}
+          {{ form.surname }}
         </div>
 
-        <input type="email" name="email" placeholder="Email" required>
-        <!-- Email input -->
+        {{ form.email.label_tag }}
+        {{ form.email }}
 
-        <textarea name="message" placeholder="Message" required></textarea>
-        <!-- Message textarea -->
+        {{ form.message.label_tag }}
+        {{ form.message }}
 
         <label class="checkbox-wrapper">
-          <!-- Checkbox to agree to terms -->
-          <input type="checkbox" name="terms" required>
+          {{ form.terms }}
           <span>I agree to the Terms and Conditions</span>
         </label>
 
-        <!-- Display flashed messages -->
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class="flashes">
-              {% for message in messages %}
-                <li>{{message}}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
+        <!-- Display success messages -->
+        {% if messages %}
+          <ul class="flashes">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
 
         <button class="cbtn" type="submit">Send</button>
-        <!-- Submit button -->
       </form>
-      <!-- Contact form end -->
     </div>
   </div>
 </div>

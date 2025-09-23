@@ -1,49 +1,35 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %} Pawfect Match {% endblock %}
+{% block title %} {{ title|default:"Pawfect Match" }} {% endblock %}
 
 {% block content %}
 
-{% set title = "About us" %}
 {% include 'hero.html' %}
 
 {% for section in sections %}
-<section class="{{ 'about-light-rev' if section.reverse else 'about-light' }}">
-  
-  <div class="{{ 'light-contain-rev' if section.reverse else 'light-contain' }}">
-    <img src="{{ url_for('static', filename=section.image) }}" alt="{{ section.alt }}" />
-    <div class="{{ 'light-txt-rev' if section.reverse else 'light-txt' }}">
+<section class="{% if section.reverse %}about-light-rev{% else %}about-light{% endif %}">
+  <div class="{% if section.reverse %}light-contain-rev{% else %}light-contain{% endif %}">
+    <img src="{% static section.image %}" alt="{{ section.alt }}" />
+    <div class="{% if section.reverse %}light-txt-rev{% else %}light-txt{% endif %}">
       <h2>{{ section.title }}</h2>
-      {% for paragraph in section.paragraphs %}  
-        <p>{{ paragraph }}</p><br>
+      {% for paragraph in section.paragraphs %}
+        <p>{{ paragraph }}</p>
       {% endfor %}
-      {% if section.button %}
-        <a class="btn" href="{{ section.button.url }}">{{ section.button.text }}</a>
-      {% endif %}
     </div>
   </div>
 </section>
 
 
 
-{%if loop.index == 2 %}
-   {% include 'stats.html' %}
-{% endif%}
+
 {% endfor %}
 
-
-
+<!-- Dog Fact Section -->
 {% include 'dog-fact.html' %}
-
-
-
-
-
-
-
-
 
 
 {% include 'form.html' %}
 
 {% endblock %}
+

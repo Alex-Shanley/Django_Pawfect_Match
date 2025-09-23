@@ -1,33 +1,16 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %} Pawfect Match{% endblock %}
+{% block title %} {{ title|default:"Pawfect Match" }} {% endblock %}
 
 {% block content %}
 
-
-
-
-{% set title = "FAQ" %}
 {% include 'hero.html' %}
-
 
 {% include 'questions.html' %}
 
-
-
 {% include 'dog-fact.html' %}
 
-
-
 {% include 'form.html' %}
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

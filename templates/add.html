@@ -1,26 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %} Pawfect Match{% endblock %}
+{% block title %}Pawfect Match{% endblock %}
 
 {% block content %}
 
-
-
-
-{% set title = "Add pets" %}
 {% include 'hero.html' %}
 
 <div class="add-pet-section">
   <!-- Left image -->
   <div class="add-pet-image">
-    <img src="{{ url_for('static', filename='images/contact-image.png') }}" alt="Contact image" class="Add pet" />
+    <img src="{% static 'images/contact-image.png' %}" alt="Add Pet" class="Add pet" />
   </div>
 
   <!-- Right form -->
   <div class="add-pet-form-wrapper">
-    <form method="POST" enctype="multipart/form-data" action="{{ url_for('add') }}" class="add-pet-form">
-      
-      <h2 class="add-pet-title">Add a New Pet</h2>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'pets:add_pet' %}" class="add-pet-form">
+      {% csrf_token %}
+      <h2 class="add-pet-title">{{ title }}</h2>
 
       <div class="add-pet-form-group">
         <label for="img">Upload Pet Image:</label>
@@ -52,23 +49,7 @@
   </div>
 </div>
 
-
-
-
-
 {% include 'dog-fact.html' %}
-
-
-
 {% include 'form.html' %}
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

@@ -1,46 +1,42 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Pawfect Match{% endblock %}
 
 {% block content %}
 
-<!-- content -->
-
-
+<!-- Hero Section -->
 <section class="about-light-rev">
   <div class="light-contain-rev">
-    <img src="{{ url_for('static', filename='images/Cute-dog.png') }}" alt="woman and dog" />
+    <img src="{% static 'images/Cute-dog.png' %}" alt="Cute dog" />
     <div class="light-txt-rev">
-      <h2>Your Pawfect Match</h2>
-      <p>Discover a world of wagging tails and warm hearts. Whether you're ready to adopt or just browsing, we're here to help you meet your new best friend. Because every pet deserves a loving home and every person deserves a pawfect companion.</p>
-      <a class="btn" href="{{ url_for('contact') }}">Contact us</a>
+      <h1>Your Pawfect Match</h1>
+      <p>
+        Discover a world of wagging tails and warm hearts. Whether you're ready to adopt or just browsing,
+        we're here to help you meet your new best friend. Because every pet deserves a loving home and
+        every person deserves a pawfect companion.
+      </p>
+      <a class="btn" href="{% url 'contact:contact' %}">Contact us</a>
     </div>
   </div>
 </section>
 
+<!-- Statistics Section -->
+{% include 'stats.html' %}
 
+<!-- How We Work Section -->
+{% include 'how_we_work.html' %}
 
+<!-- Featured Pets Section -->
+{% include 'featured-pets.html' %}
 
+<!-- FAQ / Questions Section -->
+{% include 'questions.html' %}
 
+<!-- Dog Fact Section -->
+{% include 'dog-fact.html' %}
 
- {% include 'stats.html' %}
-
- {% include 'how_we_work.html' %}
-
-
-
- {% include 'featured-pets.html' %}
- 
-
-
-
- {% include 'questions.html' %}
-
- {% include 'dog-fact.html' %}
-
- {% include 'form.html' %}
-
+<!-- Contact Form Section -->
+{% include 'form.html' %}
 
 {% endblock %}
-
-
