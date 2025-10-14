@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 
-
 def register_view(request):
-
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -18,12 +16,9 @@ def register_view(request):
             messages.error(request, 'Please correct the errors below.')
     else:
         form = CustomUserCreationForm()
-    
-    return render(request, 'auth_app/register.html', {'form': form})
-
+    return render(request, 'auth_app/signup.html', {'form': form})
 
 def login_view(request):
-
     if request.method == 'POST':
         form = CustomAuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -35,12 +30,15 @@ def login_view(request):
             messages.error(request, 'Invalid username or password.')
     else:
         form = CustomAuthenticationForm()
-    
     return render(request, 'auth_app/login.html', {'form': form})
-
 
 @login_required
 def profile_view(request):
-    """User profile view"""
-    return render(request, 'auth_app/profile.html', {'user': request.user})
+    page_title = "My Profile"
+    return render(request, 'auth_app/profile.html', {'user': request.user, 'title': page_title,})
 
+@login_required
+def logout_view(request):
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return redirect('core:index')

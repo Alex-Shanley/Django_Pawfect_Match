@@ -15,4 +15,6 @@ def contact(request):
     else:
         form = ContactForm()
 
-    return render(request, 'contact.html', {'form': form})
+        page_title = "Contact Us"
+
+    return render(request, 'contact.html', {'form': form, 'title': page_title,})

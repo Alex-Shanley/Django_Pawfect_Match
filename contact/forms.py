@@ -3,7 +3,7 @@ from .models import Submission
 
 
 class ContactForm(forms.ModelForm):
-    """Form for contact submissions"""
+    
     class Meta:
         model = Submission
         fields = ['first_name', 'surname', 'email', 'message', 'terms']

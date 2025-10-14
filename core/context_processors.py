@@ -2,7 +2,7 @@ import requests
 
 
 def dog_facts(request):
-    """Context processor to inject dog facts into all templates"""
+    
     def get_dog_facts(limit=3):
         try:
             response = requests.get(f"https://dogapi.dog/api/v2/facts?limit={limit}")

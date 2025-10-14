@@ -32,8 +32,12 @@
     {% if pets %}
       {% for pet in pets %}
         <div class="pet-card">
-          <!-- Use static path if pet.img is just a string path -->
-          <img src="{% static pet.img %}" alt="{{ pet.name }}">
+          
+{% if pet.img %}
+    <img src="{{ pet.img.url }}" alt="{{ pet.name }}">
+{% else %}
+    <img src="{% static 'images/default-pet.png' %}" alt="No image available">
+{% endif %}
           
           <div class="card-content">
             <p class="species">{{ pet.species|upper }}</p>
@@ -43,10 +47,17 @@
 
             <!-- Action Buttons -->
             <div class="card-actions">
+              {% if user.is_authenticated %}
               <a href="{% url 'pets:edit_pet' pet.id %}" class="edit-btn">Edit</a>
+              
               <form method="POST" action="{% url 'pets:delete_pet' pet.id %}" onsubmit="return confirm('Are you sure you want to delete this pet?');" style="display:inline;">
+                
+
                 {% csrf_token %}
                 <button type="submit" class="delete-btn">Delete</button>
+
+                {% endif %}
+
               </form>
             </div>
           </div>

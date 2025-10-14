@@ -22,22 +22,25 @@
     <ul>
       <li class="logo">
         <a href="{% url 'core:index' %}">
-          <img src="{% static 'images/Header logo.png' %}" alt="Pawfect Match Logo" class="logo-image" />
+          <img src="/media/uploads/Header logo.png" alt="Pawfect Match Logo" class="logo-image" />
         </a>
       </li>
       <li class="hideOnMobile"><a href="{% url 'core:index' %}">HOME</a></li>
       <li class="hideOnMobile"><a href="{% url 'core:about' %}">ABOUT</a></li>
       <li class="hideOnMobile"><a href="{% url 'pets:list_pets' %}">PETS</a></li>
-      {% if user.is_authenticated %}
+ 
+      <li class="hideOnMobile"><a href="{% url 'core:faq' %}">FAQ</a></li>
+      <li class="hideOnMobile "><a href="{% url 'contact:contact' %}">CONTACT US</a></li>
+
+           {% if user.is_authenticated %}
         <li class="hideOnMobile"><a href="{% url 'pets:add_pet' %}">ADD PET</a></li>
         <li class="hideOnMobile"><a href="{% url 'auth_app:profile' %}">PROFILE</a></li>
-        <li class="hideOnMobile"><a href="{% url 'auth_app:logout' %}">LOGOUT</a></li>
+        <li class="hideOnMobile contact-button"><a href="{% url 'auth_app:logout' %}">LOGOUT</a></li>
       {% else %}
-        <li class="hideOnMobile"><a href="{% url 'auth_app:login' %}">LOGIN</a></li>
-        <li class="hideOnMobile"><a href="{% url 'auth_app:register' %}">REGISTER</a></li>
+      <li class="hideOnMobile"><a href="{% url 'auth_app:signup' %}">SIGN UP </a></li>
+        <li class="hideOnMobile contact-button"><a href="{% url 'auth_app:login' %}">LOGIN</a></li>
+        
       {% endif %}
-      <li class="hideOnMobile"><a href="{% url 'core:faq' %}">FAQ</a></li>
-      <li class="hideOnMobile contact-button "><a href="{% url 'contact:contact' %}">CONTACT US</a></li>
       <li class="menu-button" onclick="showSidebar()">
         <a href="#">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
@@ -60,11 +63,12 @@
       <li><a href="{% url 'pets:list_pets' %}">PETS</a></li>
       {% if user.is_authenticated %}
         <li><a href="{% url 'pets:add_pet' %}">ADD PET</a></li>
-        <li><a href="{% url 'auth_app:profile' %}">PROFILE</a></li>
+        <a href="{% url 'auth_app:profile' %}">PROFILE</a>
         <li><a href="{% url 'auth_app:logout' %}">LOGOUT</a></li>
       {% else %}
         <li><a href="{% url 'auth_app:login' %}">LOGIN</a></li>
-        <li><a href="{% url 'auth_app:register' %}">REGISTER</a></li>
+        <li ><a href="{% url 'auth_app:signup' %}">REGISTER</a></li>
+
       {% endif %}
       <li><a href="{% url 'core:faq' %}">FAQ</a></li>
       <li><a href="{% url 'contact:contact' %}">CONTACT US</a></li>
@@ -96,7 +100,7 @@
     <div class="footer-container">
         <div class="footer-row">
               <div class="footer-colum">
-                <img src="{% static 'images/footer logo.png' %}" alt="Logo">
+                <img src="/media/uploads/footer logo.png" alt="Logo">
             </div>
             <div class="footer-colum">
                 <h4>ADDRESS</h4>

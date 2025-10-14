@@ -1,25 +1,32 @@
 {% extends "base.html" %}
+{% load static %}
+
+
 
 {% block title %} Pawfect Match{% endblock %}
 
 {% block content %}
 
-{% set title = "Edit Pet" %}
+
 {% include 'hero.html' %}
 
 <section class="add-pet-section">
   <div class="add-pet-image">
-    <img src="{{ url_for('static', filename=pet.img) }}" alt="{{ pet.name }}" />
+    {% if pet.img %}
+    <img src="{{ pet.img.url }}" alt="{{ pet.name }}">
+{% else %}
+    <img src="{% static 'images/default-pet.png' %}" alt="No image available">
+{% endif %}
   </div>
 
   <div class="add-pet-form-wrapper">
-    <form method="POST" enctype="multipart/form-data" action="{{ url_for('edit_pet', pet_id=pet.id) }}" class="add-pet-form">
-      
+    <form method="POST" enctype="multipart/form-data" action="{% url 'pets:edit_pet' pet.id %}" class="add-pet-form">
+      {% csrf_token %}
       <h2 class="add-pet-title">Edit Pet</h2>
 
       <div class="add-pet-form-group">
         <label for="image">Upload New Image (optional):</label>
-        <input type="file" name="image" accept="image/*" />
+        <input type="file" name="img" accept="image/*" />
       </div>
 
       <div class="add-pet-form-group">
@@ -41,6 +48,8 @@
         <label for="species">Species:</label>
         <input type="text" name="species" value="{{ pet.species }}" required />
       </div>
+
+      
 
       <button type="submit" class="add-pet-btn">Update Pet</button>
     </form>

@@ -6,7 +6,7 @@ from .models import Pet
 from .forms import PetForm
 from contact.forms import ContactForm
 
-# Create your views here.
+
 
 def list_pets(request):
     """List and filter pets"""
@@ -53,6 +53,8 @@ def list_pets(request):
     else:
         form = ContactForm()
 
+        page_title = "Pets"
+
     return render(request, 'pets.html', {
         'pets': pets,
         'name': name,
@@ -60,25 +62,26 @@ def list_pets(request):
         'breed': breed,
         'selected_species': species,
         'species_options': species_options,
-        'form': form
+        'form': form,
+        'title': page_title
     })
 
 
 @login_required
 def add_pet(request):
-    """Add a new pet"""
+    page_title = "Add pet"
+
     if request.method == 'POST':
         form = PetForm(request.POST, request.FILES)
         if form.is_valid():
             pet = form.save()
             messages.success(request, f"Pet '{pet.name}' added successfully!")
             return redirect('pets:list_pets')
-        else:
-            messages.error(request, "Please correct the errors below.")
     else:
         form = PetForm()
 
-    return render(request, 'add.html', {'form': form})
+    return render(request, 'add.html', {'form': form, 'title': page_title})
+
 
 
 @login_required
@@ -97,7 +100,9 @@ def edit_pet(request, pet_id):
     else:
         form = PetForm(instance=pet)
 
-    return render(request, 'edit.html', {'form': form, 'pet': pet})
+        page_title = "Edit pet"
+
+    return render(request, 'edit.html', {'form': form, 'pet': pet, 'title': page_title,})
 
 
 @login_required
@@ -106,5 +111,9 @@ def delete_pet(request, pet_id):
     pet = get_object_or_404(Pet, id=pet_id)
     pet_name = pet.name
     pet.delete()
-    messages.success(request, f"Deleted pet {pet_name}")
+    messages.success(request, f"Deleted pet {pet_name} successfully.")
     return redirect('pets:list_pets')
+
+
+
+
