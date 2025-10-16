@@ -6,6 +6,8 @@ I chose to develop Pawfect Match, a playful and engaging platform centred around
 
 The idea of pets without homes is something that deeply resonates with me, so I intentionally designed the platform to be cheerful and uplifting. By creating a vibrant and user-friendly experience, I aimed to bring positivity and joy to a serious topic, making Pawfect Match both functional and emotionally engaging.
 
+## 🚀 superuser - username / admin
+## Password / Pawfectmatch
 
 🔗 **Live Site**: [https://pawfect-match-b7p8.onrender.com/]
 
@@ -24,9 +26,8 @@ The idea of pets without homes is something that deeply resonates with me, so I 
 ## 🖥️ Tech Stack
 
 - **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Python, Flask
+- **Backend**: Python, Django
 - **Database**: PostgreSQL
-- **ORM**: SQLAlchemy
 - **Deployment**: Render
 - **API Integration**: Dog facts from [Dog API](https://dogapi.dog/api/v2/facts?)
 

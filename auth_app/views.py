@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomProfileForm
+
 
 def register_view(request):
     if request.method == 'POST':
@@ -18,6 +19,7 @@ def register_view(request):
         form = CustomUserCreationForm()
     return render(request, 'auth_app/signup.html', {'form': form})
 
+
 def login_view(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(data=request.POST)
@@ -32,10 +34,26 @@ def login_view(request):
         form = CustomAuthenticationForm()
     return render(request, 'auth_app/login.html', {'form': form})
 
+
 @login_required
 def profile_view(request):
-    page_title = "My Profile"
-    return render(request, 'auth_app/profile.html', {'user': request.user, 'title': page_title,})
+   
+    if request.method == 'POST':
+        form = CustomProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your profile has been updated successfully.")
+            return redirect('auth_app:profile')
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = CustomProfileForm(instance=request.user)
+
+    return render(request, 'auth_app/profile.html', {
+        'form': form,
+        'title': 'My Details',
+    })
+
 
 @login_required
 def logout_view(request):

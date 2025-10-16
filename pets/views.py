@@ -9,7 +9,7 @@ from contact.forms import ContactForm
 
 
 def list_pets(request):
-    """List and filter pets"""
+   
     
     name = request.GET.get('name', '').strip()
     age = request.GET.get('age', '').strip()

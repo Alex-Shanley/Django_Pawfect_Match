@@ -2087,3 +2087,15 @@ input[type="checkbox"] {
 
 
 
+.signup-btn button {
+  align-self: center;
+  background-color: #233BA9;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  
+}
