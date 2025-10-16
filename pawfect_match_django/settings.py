@@ -66,15 +66,11 @@ WSGI_APPLICATION = 'pawfect_match_django.wsgi.application'
 # Database
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"postgres://{os.getenv('DB_USER', 'AlexS')}:"
-                f"{os.getenv('DB_PASSWORD', 'Daniboy!2')}@"
-                f"{os.getenv('DB_HOST', 'localhost')}:"
-                f"{os.getenv('DB_PORT', '5432')}/"
-                f"{os.getenv('DB_NAME', 'pawfectdb')}",
+        default=os.getenv('DATABASE_URL'),
         conn_max_age=600,
+        ssl_require=True
     )
 }
-
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
