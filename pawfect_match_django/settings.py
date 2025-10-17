@@ -11,7 +11,8 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fallback-key')
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,django-pawfect-match.onrender.com').split(',')
+ALLOWED_HOSTS = ['django-pawfect-match.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 
