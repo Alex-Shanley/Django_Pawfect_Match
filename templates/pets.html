@@ -1,3 +1,12 @@
+{% load static %}
+{% extends "base.html" %}
+
+{% block title %} Pawfect Match {% endblock %} 
+
+{% block content %} 
+
+{% include 'hero.html' %}
+
 <div class="pets-container">
     {% if pets %}
         {% for pet in pets %}
@@ -30,3 +39,10 @@
         <p>No pets available at the moment. Please check back later!</p>
     {% endif %}
 </div>
+
+{% include 'dog-fact.html' %} 
+
+{% include 'form.html' %}
+
+
+{% endblock %}
