@@ -28,46 +28,40 @@
   </form>
 
   <!-- Pets Display -->
-  <div class="pets-container">
-    {% if pets %}
-      {% for pet in pets %}
-        <div class="pet-card">
-          
-{% if pet.img %}
-    <img src="{% static 'images/pets/{{ pet.img_name }}' %}" alt="{{ pet.name }}">
-{% else %}
-    <img src="{% static 'images/pets/{{ pet.img_name }}' %}" alt="{{ pet.name }}">
+ <div class="pets-container">
+  {% if pets %}
+    {% for pet in pets %}
+      <div class="pet-card">
 
-{% endif %}
-          
-          <div class="card-content">
-            <p class="species">{{ pet.species|upper }}</p>
-            <h3>{{ pet.name }}</h3>
-            <p><strong>Breed:</strong> {{ pet.breed }}</p>
-            <p><strong>Age:</strong> {{ pet.age }} years old</p>
+        {% if pet.img %}
+          <img src="{{ pet.img.url }}" alt="{{ pet.name }}">
+        {% else %}
+          <img src="{% static 'images/pets/default.jpg' %}" alt="Default pet image">
+        {% endif %}
 
-            <!-- Action Buttons -->
-            <div class="card-actions">
-              {% if user.is_authenticated %}
+        <div class="card-content">
+          <p class="species">{{ pet.species|upper }}</p>
+          <h3>{{ pet.name }}</h3>
+          <p><strong>Breed:</strong> {{ pet.breed }}</p>
+          <p><strong>Age:</strong> {{ pet.age }} years old</p>
+
+          <div class="card-actions">
+            {% if user.is_authenticated %}
               <a href="{% url 'pets:edit_pet' pet.id %}" class="edit-btn">Edit</a>
               
               <form method="POST" action="{% url 'pets:delete_pet' pet.id %}" onsubmit="return confirm('Are you sure you want to delete this pet?');" style="display:inline;">
-                
-
                 {% csrf_token %}
                 <button type="submit" class="delete-btn">Delete</button>
-
-                {% endif %}
-
               </form>
-            </div>
+            {% endif %}
           </div>
         </div>
-      {% endfor %}
-    {% else %}
-      <p>No pets available at the moment. Please check back later!</p>
-    {% endif %}
-  </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No pets available at the moment. Please check back later!</p>
+  {% endif %}
+</div>
 </section>
 
 {% include 'dog-fact.html' %}
