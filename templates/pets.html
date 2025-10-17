@@ -34,9 +34,9 @@
         <div class="pet-card">
           
 {% if pet.img %}
-    <img src="{{ pet.img.url }}" alt="{{ pet.name }}">
+    <img src="{% static 'images/pets/{{ pet.img_name }}' %}" alt="{{ pet.name }}">
 {% else %}
-    <img src="{% static 'images/default-pet.png' %}" alt="No image available">
+    <img src="{% static 'images/pets/{{ pet.img_name }}' %}" alt="{{ pet.name }}">
 {% endif %}
           
           <div class="card-content">
