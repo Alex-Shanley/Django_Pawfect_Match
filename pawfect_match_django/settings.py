@@ -7,13 +7,8 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Secret Key
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fallback-key')
-
-# Debug mode
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
-
-# Allowed hosts
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 # Installed apps
@@ -65,10 +60,7 @@ WSGI_APPLICATION = 'pawfect_match_django.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv(
-            'DATABASE_URL',
-            'postgresql://pawfectdb_match_user:x0RTfinQWtyF6tLrgwjQv1toDwGU1aWX@dpg-d3oo7re3jp1c739k5f00-a.render.com:5432/pawfectdb_match'
-        ),
+        default=os.getenv('DATABASE_URL'),
         conn_max_age=600,
         ssl_require=True
     )
