@@ -34,11 +34,9 @@
         <div class="pet-card">
           
 {% if pet.img %}
-    <img src="{{ pet.img.url }}" alt="{{ pet.name }}">
-
+    <img src="{% media 'uploads/{{ pet.img_name }}' %}" alt="{{ pet.name }}">
 {% else %}
-    <img src="{{ pet.img.url }}" alt="{{ pet.name }}">
-
+    <img src="{% media 'uploads/{{ pet.img_name }}' %}" alt="{{ pet.name }}">
 {% endif %}
           
           <div class="card-content">
