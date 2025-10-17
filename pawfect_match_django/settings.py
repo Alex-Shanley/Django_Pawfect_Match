@@ -63,10 +63,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pawfect_match_django.wsgi.application'
 
-# Database
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://pawfectdb_match_user:x0RTfinQWtyF6tLrgwjQv1toDwGU1aWX@dpg-d3oo7re3jp1c739k5f00-a/pawfectdb_match',
+        default=os.getenv(
+            'DATABASE_URL',
+            'postgresql://pawfectdb_match_user:x0RTfinQWtyF6tLrgwjQv1toDwGU1aWX@dpg-d3oo7re3jp1c739k5f00-a.render.com:5432/pawfectdb_match'
+        ),
         conn_max_age=600,
         ssl_require=True
     )

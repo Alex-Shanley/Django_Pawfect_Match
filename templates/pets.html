@@ -34,9 +34,9 @@
         <div class="pet-card">
           
 {% if pet.img %}
-    <img src="{% media 'uploads/{{ pet.img_name }}' %}" alt="{{ pet.name }}">
+    <img src="{% static 'images/pets/{{ pet.img_name }}' %}" alt="{{ pet.name }}">
 {% else %}
-    <img src="{% media 'uploads/{{ pet.img_name }}' %}" alt="{{ pet.name }}">
+    <img src="{% static 'images/pets/{{ pet.img_name }}' %}" alt="{{ pet.name }}">
 {% endif %}
           
           <div class="card-content">
