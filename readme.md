@@ -9,7 +9,7 @@ The idea of pets without homes is something that deeply resonates with me, so I 
 ## 🚀 superuser - username / admin
 ## Password / Pawfectmatch
 
-🔗 **Live Site**: [https://pawfect-match-b7p8.onrender.com/]
+🔗 **Live Site**: [https://django-pawfect-match.onrender.com/]
 
 ## 🚀 Key Features
 
@@ -35,81 +35,7 @@ The idea of pets without homes is something that deeply resonates with me, so I 
 
 ## 📁 Project Structure
 
-pawfect/
 
-│
-├── static/
-│ ├── css/
-│ └── images/
-| └── Js/
-│
-│
-├── templates/
-│   ├── about.html
-│   ├── add.html
-│   ├── base.html             
-│   ├── contact.html
-│   ├── dog-fact.html         
-│   ├── edit.html             
-│   ├── faq.html
-│   ├── featured-pets.html
-│   ├── form.html             
-│   ├── hero.html             
-│   ├── how_we_work.html      
-│   ├── index.html            
-│   ├── pets.html             
-│   ├── questions.html        
-│   └── stats.html    
-│
-├── app.py
-├── requirements.txt
-└── README.md
 
-## ✨ Requirements
-
-alembic==1.16.4
-blinker==1.9.0
-click==8.2.1
-Flask==3.1.1
-Flask-Migrate==4.1.0
-Flask-SQLAlchemy==3.1.1
-greenlet==3.2.3
-gunicorn==23.0.0
-itsdangerous==2.2.0
-Jinja2==3.1.6
-Mako==1.3.10
-MarkupSafe==3.0.2
-packaging==25.0
-psycopg2-binary==2.9.10
-python-dotenv==1.1.1
-requests==2.31.0
-SQLAlchemy==2.0.41
-typing_extensions==4.14.1
-Werkzeug==3.1.3
-
-## Deploy Pawfect on Render.com
-
-Push your Pawfect code to GitHub (with requirements.txt and Procfile).
-
-- ## Create a PostgreSQL database on Render and get the connection URL.
-
-- ## Create a new Web Service on Render:
-
-- ## Connect your GitHub repo.
-
-- ## Set build command: pip install -r requirements.txt
-
-- ## Set start command: gunicorn app:app
-
-- ## Add environment variables:
-
-- ## DATABASE_URL = your Render PostgreSQL URL
-
-- ## SECRET_KEY = your Flask secret key
-
-- ## Deploy and wait for Render to build the app.
-
-Access Pawfect
-Once deployed, open the Render URL provided, e.g.,
 
 🔗 **Live Site**: [https://pawfect-match-b7p8.onrender.com/]
