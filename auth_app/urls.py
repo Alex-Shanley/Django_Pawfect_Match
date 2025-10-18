@@ -11,8 +11,5 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('signup/', views.register_view, name='signup'),
     path('forgot-password/', auth_views.PasswordResetView.as_view(template_name='auth_app/forgot_password.html'), name='forgot_password'),
-path('forgot-password/done/', auth_views.PasswordResetDoneView.as_view(
-    template_name='auth_app/password_reset_done.html'),
-    name='password_reset_done'
-),
+    path('forgot-password/done/', auth_views.PasswordResetDoneView.as_view( template_name='auth_app/password_reset_done.html'),  name='password_reset_done'),
 ]
